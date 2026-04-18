@@ -6,13 +6,14 @@
 
 #include "recommender.h"
 #include "utility_matrix.h"
+#include "config.h"
 
 #define No_of_movies 9125
 
 void ratemovie(int uid){
 	int movieid;
 	double rating;
-	FILE *fstream = fopen("\\Dataset\\ratings_learn.csv","a");
+	FILE *fstream = fopen(PATH_RATINGS_LEARN,"a");
 	printf("Enter movieid: ");
 	if(1 != scanf("%d",&movieid)){
         printf("\nCharacter inputs are not accepted.\n");
@@ -38,7 +39,11 @@ void ratemovie(int uid){
 int assignuid(){
     char *line, *record;
     char tmp[1024];
-    FILE *fstream = fopen("\\Dataset\\ratings_learn.csv","r");
+    FILE *fstream = fopen(PATH_RATINGS_LEARN,"r");
+    if (fstream == NULL) {
+        fprintf(stderr, "Error: could not open file: %s\n", PATH_RATINGS_LEARN);
+        return 1;
+    }
     int j=0;
     int max = 0;
     while((line=fgets(tmp,sizeof(tmp),fstream))!=NULL){
@@ -61,11 +66,11 @@ int assignuid(){
 void getmovies(int uid){
     char *line, *record;
     char tmp[1024];
-    FILE *fstream = fopen("\\Dataset\\ratings_learn.csv","r");
+    FILE *fstream = fopen(PATH_RATINGS_LEARN,"r");
     char *movienames = (char *)malloc(sizeof(char) * No_of_movies * 1024);
 	char *moviegenres = (char *)malloc(sizeof(char) * No_of_movies * 1024);
-	get_movie_names(movienames,"\\Dataset\\movies.csv");
-	get_movie_genres(moviegenres,"\\Dataset\\movies_genres.csv");
+	get_movie_names(movienames, PATH_MOVIES);
+	get_movie_genres(moviegenres, PATH_MOVIES_GENRES);
     int j=0,userid,movieid;
     double rating;
     while((line=fgets(tmp,sizeof(tmp),fstream))!=NULL){
