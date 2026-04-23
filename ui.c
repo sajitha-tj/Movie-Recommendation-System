@@ -105,13 +105,14 @@ void main(){
     int ans;
     int uid;
     int choice=0;
-    int ans1;
+    int ans1=2;
     while(repeat==1){
         printf("\t\tMenu\nPlease enter one of the following choices:\n\t\t1 Help\n\n\t\t2 Login\n\n");
-        if(1 != scanf("%d",&ans1)){
-            printf("\nCharacter inputs are not accepted.\n");
-            exit(12);
-        }
+        // if(1 != scanf("%d",&ans1)){
+        //     printf("\nCharacter inputs are not accepted.\n");
+        //     exit(12);
+        // }
+        ans1=2;
         switch(ans1){
         case 1:
             printf("\nHello, following are the instructions to use this movie recommendation system!\n");
@@ -126,24 +127,26 @@ void main(){
         }
     }
     printf("Are you an existing user(Type '0') or a new user(Type '1'): ");
-    if(1 != scanf("%d",&ans)){
-        printf("\nCharacter inputs are not accepted.\n");
-        exit(42);
-    }
+    // if(1 != scanf("%d",&ans)){
+    //     printf("\nCharacter inputs are not accepted.\n");
+    //     exit(42);
+    // }
+    ans=0;
     switch(ans){
         case 0:
             printf("Enter your user id: ");
+            uid = 548;
             repeat = 1;
-            while (repeat == 1){
-                if(1 != scanf("%d",&uid)){
-                    printf("\nCharacter inputs are not accepted. Please enter correct User ID:\n");
-                    break;
-                }
-                else if(uid<1 || uid>=assignuid()){
-                    printf("Invalid user id. Please enter correct id: \n");
-                }
-                else repeat = 0;
-            }
+            // while (repeat == 1){
+            //     if(1 != scanf("%d",&uid)){
+            //         printf("\nCharacter inputs are not accepted. Please enter correct User ID:\n");
+            //         break;
+            //     }
+            //     else if(uid<1 || uid>=assignuid()){
+            //         printf("Invalid user id. Please enter correct id: \n");
+            //     }
+            //     else repeat = 0;
+            // }
             break;
         case 1:
             uid = assignuid();
@@ -158,7 +161,8 @@ void main(){
     repeat = 1;
     while (repeat == 1){
         printf("\nDo you want to:\n0. Rate movies(Type '0')\n1. Show existing recommendations for your user id (Type '1')\n2. Movies that you have rated (Type '2')\n3. Exit(Type '3')\n");
-        scanf("%d",&ans);
+        // scanf("%d",&ans);
+        ans=1;
         if(isalpha(ans)){
             printf("\nCharacter inputs are not accepted.\n");
             break;
@@ -184,5 +188,6 @@ void main(){
         default:
             printf("Enter valid input.\n");
         }
+        break;
     }
 }

@@ -6,3 +6,6 @@
 dist/
 *.exe
 *.out
+
+# perf data files
+perf.data
