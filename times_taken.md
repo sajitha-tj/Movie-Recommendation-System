@@ -1,4 +1,4 @@
-Time taken for recommender function for 5 consecutive runs:
+Time taken for recommender function for 5 consecutive runs (baseline):
 
 Time taken to process: 0.17 seconds
 Time taken to process: 0.14 seconds
