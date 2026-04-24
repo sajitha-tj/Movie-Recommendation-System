@@ -37,7 +37,18 @@ Based on the report, the following functions were identified as hotspots and tar
 
 ### Optimization Strategies
 
-#### 1. Optimizing `calc_similarity`
+#### 1. Optimizing `pearson_correlation`
+
+The original implementation of the `pearson_correlation` function was already efficient in structure, but further optimizations were applied to improve its performance as it represents the primary computational hotspot in the program. The function was enhanced by introducing the `restrict` qualifier to indicate that the input arrays do not overlap in memory, allowing the compiler to safely apply aggressive optimizations such as SIMD vectorization. Additionally, loop unrolling was implemented to process multiple elements per iteration, reducing loop control overhead and increasing instruction-level parallelism. Temporary variables were also used to minimize repeated memory accesses and improve register utilization.
+
+Further improvements focused on reducing computational overhead within the loop and in the final calculation. Instead of computing two separate square root operations, the optimized version calculates a single square root of the product of magnitudes, reducing the cost of expensive mathematical operations. These changes collectively improve cache efficiency, enable better use of modern CPU pipelines, and significantly speed up execution. As a result, the optimized function achieves better overall performance, which has a noticeable impact on total runtime due to its high frequency of invocation in the recommendation process.
+
+Note: Use following compiler flags to enable optimizations and vectorization:
+```bash
+gcc -O3 -march=native -ffast-math <... rest of the commands ...>
+```
+
+#### 2. Optimizing `calc_similarity`
 
 The original implementation of `calc_similarity` introduced significant overhead by dynamically allocating memory for a temporary array `A` inside the loop for every user, copying an entire row of the normalized matrix into it, and then freeing it. This resulted in repeated heap allocations and deallocations, which are relatively expensive operations, as well as unnecessary memory copying proportional to the number of users multiplied by the number of movies. These operations not only increased execution time but also negatively impacted cache performance, since data was being duplicated instead of accessed directly from its original contiguous location in memory.
 
