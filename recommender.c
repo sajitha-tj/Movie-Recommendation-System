@@ -137,7 +137,6 @@ void recommender(int uid){
 		}
 		printf("%d. %s %s",i+1,&movienames[recommended_movies[i] * 1024], &moviegenres[recommended_movies[i] * 1024]);
 		if(i>0 && (i+1)%10==0){
-			break;
             printf("\nDo you want to see more movie recommendations? \nType '0' for No and '1' for Yes: ");
             if(1 != scanf("%d",&choice)){
                 printf("\nCharacter inputs are not accepted.\n");
