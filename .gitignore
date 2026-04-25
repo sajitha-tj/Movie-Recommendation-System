@@ -9,3 +9,4 @@ dist/
 
 # perf data files
 perf.data
+perf.data.*
