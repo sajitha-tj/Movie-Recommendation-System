@@ -1,0 +1,12 @@
+# IDE folders
+.idea/
+.vscode/
+
+# built files
+dist/
+*.exe
+*.out
+
+# perf data files
+perf.data
+perf.data.*
